@@ -6,6 +6,8 @@ const app = express()
 app.use(express.json());
 
 
+app.use('/',homePage);
+
 app.get('/home',homePage);
 
 app.post('/hash', hashing );
