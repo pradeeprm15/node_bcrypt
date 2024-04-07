@@ -1,8 +1,13 @@
 'use strict';
 
 
-function homePage(req, res) {
-    res.send('Hi User');
+/**
+ * @param {Object} req  home page middleware
+ * @param {Object} res 
+ */
+function homePage(req, res, next) {
+    res.send('Hi User!');
+    next();
 }
 
 /**
@@ -11,7 +16,7 @@ function homePage(req, res) {
  * @param {Object} res 
  * @returns hash response
  */
-async function hashing(req, res) {
+async function hashing(req, res, next) {
     const { hash } = require('bcrypt')
     const { password, saltRounds } = req.body;
     if (!saltRounds || !password) return res.status(400).json({ success: false, msg: 'Password & saltRounds is required.' });
@@ -29,6 +34,7 @@ async function hashing(req, res) {
             description : error.message
         });
     }
+    next();
 }
 
 module.exports = {
